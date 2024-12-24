@@ -7,12 +7,14 @@ import java.time.LocalDateTime
 object Posts : Table("posts") {
     val id = integer("id").autoIncrement()
     val content = text("content")
-    val createdAt = datetime("createdAt").clientDefault {
-        LocalDateTime.now()
-    }
-    val updatedAt = datetime("updatedAt").clientDefault {
-        LocalDateTime.now()
-    }
+    val createdAt =
+        datetime("created_at").clientDefault {
+            LocalDateTime.now()
+        }
+    val updatedAt =
+        datetime("updated_at").clientDefault {
+            LocalDateTime.now()
+        }
 
     override val primaryKey = PrimaryKey(id)
 }

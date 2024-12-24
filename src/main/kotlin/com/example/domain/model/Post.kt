@@ -17,5 +17,5 @@ data class PostWithTags(
     val content: String,
     val createdAt: LocalDateTime,
     val updatedAt: LocalDateTime,
-    val tags: List<String> 
+    val tags: List<String>,
 )
