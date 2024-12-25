@@ -8,20 +8,19 @@ import kotlinx.datetime.toKotlinLocalDateTime
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 
-class PostRepo {
-    fun getAllPosts(): List<PostWithTags> =
+object PostRepo {
+    fun getAllPosts() =
         transaction {
             val posts =
-                Posts.selectAll()
-                    .map { row ->
-                        row[Posts.id] to PostWithTags(
-                            id = row[Posts.id],
-                            content = row[Posts.content],
-                            createdAt = row[Posts.createdAt].toKotlinLocalDateTime(),
-                            updatedAt = row[Posts.updatedAt].toKotlinLocalDateTime(),
-                            tags = emptyList(),
-                        )
-                    }.toMap()
+                Posts.selectAll().associate { row ->
+                    row[Posts.id] to PostWithTags(
+                        id = row[Posts.id],
+                        content = row[Posts.content],
+                        createdAt = row[Posts.createdAt].toKotlinLocalDateTime(),
+                        updatedAt = row[Posts.updatedAt].toKotlinLocalDateTime(),
+                        tags = emptyList(),
+                    )
+                }
 
 
             val tagsMap = PostsTags
