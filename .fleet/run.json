@@ -1,0 +1,16 @@
+{
+    "configurations": [
+        {
+            "type": "gradle",
+            "name": "Gradle configuration",
+            "tasks": [
+                "run"
+            ],
+            "environment": {
+                "DATABASE_URL": "jdbc:postgresql://localhost:5432/todd-blog",
+                "DATABASE_USER": "postgres",
+                "DATABASE_PASSWORD": "postgres"
+            }
+        }
+    ]
+}
