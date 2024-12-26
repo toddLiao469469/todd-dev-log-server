@@ -9,7 +9,10 @@
             "environment": {
                 "DATABASE_URL": "jdbc:postgresql://localhost:5432/todd-blog",
                 "DATABASE_USER": "postgres",
-                "DATABASE_PASSWORD": "postgres"
+                "DATABASE_PASSWORD": "postgres",
+                "JWT_SECRET": "ktor-sercet",
+                "JWT_AUDIENCE": "ktor-audience",
+                "JWT_ISSUER": "ktor-issuer"
             }
         }
     ]
