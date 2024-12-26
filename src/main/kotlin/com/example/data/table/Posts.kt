@@ -6,7 +6,10 @@ import java.time.LocalDateTime
 
 object Posts : Table("posts") {
     val id = integer("id").autoIncrement()
+    val title = text("title")
     val content = text("content")
+    val status = text("status")
+    val authorId = text("author_id")
     val createdAt =
         datetime("created_at").clientDefault {
             LocalDateTime.now()

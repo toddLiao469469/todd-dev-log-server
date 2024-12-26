@@ -3,6 +3,7 @@ package com.example.infrastructure.repo
 import com.example.data.table.Posts
 import com.example.data.table.PostsTags
 import com.example.data.table.Tags
+import com.example.domain.model.Post
 import com.example.domain.model.PostWithTags
 import kotlinx.datetime.toKotlinLocalDateTime
 import org.jetbrains.exposed.sql.*
@@ -15,9 +16,12 @@ object PostRepo {
                 Posts.selectAll().associate { row ->
                     row[Posts.id] to PostWithTags(
                         id = row[Posts.id],
+                        title = row[Posts.title],
                         content = row[Posts.content],
+                        status = row[Posts.status],
                         createdAt = row[Posts.createdAt].toKotlinLocalDateTime(),
                         updatedAt = row[Posts.updatedAt].toKotlinLocalDateTime(),
+                        authorId = row[Posts.authorId],
                         tags = emptyList(),
                     )
                 }
