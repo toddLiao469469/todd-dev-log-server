@@ -3,7 +3,10 @@ package com.example
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import com.example.application.routing.registerRoute
+import com.example.config.EnvConfig
+import com.example.config.JwtConfig
 import com.example.plugins.*
+import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
@@ -35,14 +38,15 @@ fun Application.configureNegotiation() {
 }
 
 fun Application.configureSecurity() {
+
     install(Authentication) {
-        jwt {
+        jwt("auth-jwt") {
             realm = "ktor-sample"
             verifier(
                 JWT
-                    .require(Algorithm.HMAC256("secret"))
-                    .withAudience("ktor-audience")
-                    .withIssuer("ktor-issuer")
+                    .require(Algorithm.HMAC256(EnvConfig.jwtSecret))
+                    .withAudience(EnvConfig.jwtAudience)
+                    .withIssuer(EnvConfig.jwtIssuer)
                     .build()
             )
             validate { credential ->
